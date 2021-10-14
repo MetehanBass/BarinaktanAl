@@ -15,19 +15,6 @@ import {
 } from "./NavbarElements";
 
 const Navbar = ({ toggle }) => {
-  const [scrollNav, setScrollNav] = useState(false);
-
-  const changeNav = () => {
-    if (window.scrollY >= 80) {
-      setScrollNav(true);
-    } else {
-      setScrollNav(false);
-    }
-  };
-  useEffect(() => {
-    window.addEventListener("scroll", changeNav);
-  }, []);
-
   const toggleHome = () => {
     scroll.scrollToTop();
   };
@@ -35,7 +22,7 @@ const Navbar = ({ toggle }) => {
   return (
     <>
       <IconContext.Provider value={{ color: "#FFF" }}>
-        <Nav scrollNav={scrollNav}>
+        <Nav>
           <NavbarContainer>
             <NavLogo to="/" onClick={toggleHome}>
               barınaktan Al
@@ -45,53 +32,16 @@ const Navbar = ({ toggle }) => {
             </MobileIcon>
             <NavMenu>
               <NavItem>
-                <NavLinks
-                  to="about"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Sahiplen
-                </NavLinks>
+                <NavLinks>Sahiplen</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks
-                  to="shelters"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Anlaşmalı Barınaklarımız
-                </NavLinks>
+                <NavLinks>Anlaşmalı Barınaklarımız</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks
-                  to="services"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  Hizmetlerimiz
-                </NavLinks>
+                <NavLinks>Hizmetlerimiz</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks
-                  to="donate"
-                  smooth={true}
-                  duration={500}
-                  spy={true}
-                  exact="true"
-                  offset={-80}
-                >
-                  {" "}
-                  Bağış Yap
-                </NavLinks>
+                <NavLinks>Bağış Yap</NavLinks>
               </NavItem>
             </NavMenu>
             <NavBtn></NavBtn>
