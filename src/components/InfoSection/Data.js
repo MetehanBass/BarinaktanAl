@@ -46,6 +46,7 @@ export const homeObjThree = {
   description:
     "Hayvan Barınaklarına mama yardımı yapmak hiç bu kadar kolay olmamıştı. Bağışınızı yapın sizin adınıza işlemleri biz tamamlayalım.",
   buttonLabel: "Mama Yolla",
+  buttonhref: "/bagis",
   imgStart: false,
   img: require("../../images/svg-3.svg").default,
   alt: "Papers",
