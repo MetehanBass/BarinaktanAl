@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
@@ -11,7 +11,6 @@ import {
   NavItem,
   NavLinks,
   NavBtn,
-  NavBtnLink,
 } from "./NavbarElements";
 
 const Navbar = ({ toggle }) => {
@@ -41,7 +40,7 @@ const Navbar = ({ toggle }) => {
                 <NavLinks>Hizmetlerimiz</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks>Bağış Yap</NavLinks>
+                <NavLinks href="/bagis">Bağış Yap</NavLinks>
               </NavItem>
             </NavMenu>
             <NavBtn></NavBtn>

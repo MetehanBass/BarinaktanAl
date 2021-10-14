@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { getFriendlyURL } from "workbox-core/_private";
 
 export const InfoContainer = styled.div`
   color: #fff;
