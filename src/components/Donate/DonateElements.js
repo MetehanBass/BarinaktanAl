@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DonateContainer = styled.div`
-  height: 800px;
+  height: 1300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,10 +9,10 @@ export const DonateContainer = styled.div`
   background: #f9f9f9;
 
   @media screen and (max-width: 768px) {
-    height: 800px;
+    height: 1300px;
   }
   @media screen and (max-width: 480px) {
-    height: 800px;
+    height: 1300px;
   }
 `;
 
@@ -51,7 +51,8 @@ export const DonateCard = styled.div`
   @media screen and (max-width: 375px) {
     max-width: 150px;
   }
-  @media screen and (max-width: 321px) {
+
+  @media screen and (max-width: 325px) {
     max-width: 130px;
   }
 `;
@@ -117,6 +118,15 @@ export const ChartButton = styled.button`
   border: none;
   cursor: pointer;
   margin-left: 15px;
+`;
+export const DonateCart = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 10px;
+  max-height: 540px;
+  padding: 30px;
 `;
 
 export const DonateForm = styled.form`
