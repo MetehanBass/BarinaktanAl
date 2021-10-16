@@ -66,6 +66,9 @@ export const DonateCardsH1 = styled.h1`
   @media screen and (max-width: 480px) {
     font-size: 2rem;
   }
+  @media screen and (max-width: 360px) {
+    font-size: 1rem;
+  }
 `;
 
 export const DonateCardsH2 = styled.h2`

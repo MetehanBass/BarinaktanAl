@@ -43,7 +43,7 @@ const Footer = () => {
             <FooterLinkItems>
               <FooterLinkTitle> Hizmetlerimiz </FooterLinkTitle>
               <FooterLink to="/">Sahiplen</FooterLink>
-              <FooterLink to="/">Bağış Yap</FooterLink>
+              <FooterLink to="/bagis">Bağış Yap</FooterLink>
             </FooterLinkItems>
           </FooterLinksWrapper>
           <FooterLinksWrapper>
