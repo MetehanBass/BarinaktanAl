@@ -13,7 +13,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -30,12 +29,10 @@ import {
   DonateIcon,
   DonateH2,
   DonateP,
-  DonateButton,
   ChartWrapper,
   ChartP,
   ChartButton,
   DonateForm,
-  FormRow,
   DonateCart,
 } from "./DonateElements";
 
@@ -175,7 +172,12 @@ export default function index() {
               <Typography component="h1" variant="h5">
                 Fatura Detayları
               </Typography>
-              <Box component="form" noValidate sx={{ mt: 3 }}>
+              <Box
+                component="form"
+                noValidate
+                action="/bagis_tamamla"
+                sx={{ mt: 3 }}
+              >
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <TextField
