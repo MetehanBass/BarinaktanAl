@@ -43,9 +43,65 @@ export const DonateConfirmCard = styled.div`
     transition: all 0.2s ease-in-out;
   }
   @media screen and (max-width: 480px) {
-    width: 65%;
+    width: 100%;
   }
-  @media screen and (max-width: 400px) {
-    max-width: 60%;
+
+  @media screen and (max-width: 415px) {
+    max-width: 330px;
   }
+  @media screen and (max-width: 350px) {
+    max-width: 270px;
+  }
+`;
+
+export const TextWrapper = styled.div`
+  width: 444px;
+  padding-top: 0;
+  padding-bottom: 60px;
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 415px) {
+    max-width: 330px;
+  }
+  @media screen and (max-width: 350px) {
+    max-width: 270px;
+  }
+`;
+export const TopLine = styled.p`
+  color: #01bf71;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+`;
+export const Heading = styled.h1`
+  margin-bottom: 24px;
+  font-size: 24px;
+  border-bottom: 1px solid #dcdcdc;
+  line-height: 1.1;
+  font-weight: 600;
+  color: ${({ lightText }) => (lightText ? "#f7ffa" : "#000")};
+
+  @media screen and (max-width: 480px) {
+    font-size: 32px;
+  }
+`;
+
+export const Subtitle = styled.p`
+  max-width: 440px;
+  margin-bottom: 35px;
+  font-size: 18px;
+  line-height: 24px;
+  color: ${({ darkText }) => (darkText ? "#000" : "#f7ffa")};
+`;
+
+export const Info = styled.p`
+  max-width: 440px;
+  font-size: 12px;
+  line-height: 24px;
+  color: "#000";
 `;

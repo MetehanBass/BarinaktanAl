@@ -22,6 +22,9 @@ const Container = styled.div`
     @media screen and (max-width: 480px) {
       max-width: 250px;
     }
+    @media screen and (max-width: 350px) {
+      max-width: 240px;
+    }
   }
   .rccs__card--front,
   .rccs__card--back {
@@ -83,10 +86,14 @@ const Container = styled.div`
   .rccs__card--unknown > div {
     background: linear-gradient(25deg, #999, #999);
     -webkit-box-shadow: none;
-    box-shadow: none;
+    box-shadow: 0 30px 60px 0 rgba(90, 116, 148, 0.4);
+    background-image: url(https://github.com/muhammederdem/vue-interactive-paycard/blob/master/src/assets/images/23.jpeg?raw=true);
   }
   .rccs__card--unknown .rccs__issuer {
     visibility: hidden;
+    width: 84.89px;
+    height: 45px;
+    background-image: url(https://github.com/muhammederdem/vue-interactive-paycard/blob/master/src/assets/images/visa.png?raw=true);
   }
   .rccs__card:not(.rccs__card--unknown) .rccs__card__background {
     left: -22%;
