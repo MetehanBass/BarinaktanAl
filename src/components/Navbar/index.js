@@ -31,7 +31,7 @@ const Navbar = ({ toggle }) => {
             </MobileIcon>
             <NavMenu>
               <NavItem>
-                <NavLinks>Sahiplen</NavLinks>
+                <NavLinks href="/sahiplen">Sahiplen</NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks>Anlaşmalı Barınaklarımız</NavLinks>
