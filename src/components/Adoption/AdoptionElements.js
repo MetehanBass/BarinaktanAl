@@ -1,16 +1,18 @@
 import styled from "styled-components";
+import background from "../../images/background.jpg";
 
 export const AdoptionContainer = styled.div`
   padding: 50px 0;
   color: #fff;
-  background: "#f9f9f9";
-
+  /* background-image: url("${background}");
+  background-size: 250%; */
+  background-color: #f9f9f9;
   @media screen and (max-width: 768px) {
     padding: 50px 0;
     height: 1100px;
   }
   @media screen and (max-width: 600px) {
-    height: 2000px;
+    height: 2200px;
   }
   @media screen and (max-width: 380px) {
     height: 2200px;
@@ -33,6 +35,28 @@ export const PetWrapper = styled.div`
   display: grid;
   grid-auto-rows: minimax(auto, 1fr);
   align-items: center;
+  transition: all 0.2s ease-in-ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
+`;
+
+export const FormWrapper = styled.div`
+  max-height: 0px;
+`;
+
+export const AdvertWrapper = styled.div`
+  margin-top: -90px;
+
+  @media screen and (max-width: 1012px) {
+    margin-top: 0px;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin-top: 90px;
+  }
 `;
 
 export const Column1 = styled.div`

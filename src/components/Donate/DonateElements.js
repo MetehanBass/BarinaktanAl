@@ -90,9 +90,9 @@ export const DonateH1 = styled.h1`
     font-size: 2rem;
     margin-top: -64px;
   }
-  @media screen and (max-width: 360px) {
+  @media screen and (max-width: 400px) {
     font-size: 1.5rem;
-    margin-top: -80px;
+    margin-top: 0px;
   }
 `;
 

@@ -6,23 +6,24 @@ import ButtonBase from "@mui/material/ButtonBase";
 import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import React from "react";
 
 import Cat from "../../images/svg-7.svg";
-import { Button } from "../ButtonElement";
+
 import {
   AdoptionContainer,
   AdoptionWrapper,
-  AdoptionRow,
-  Column1,
-  Column2,
-  TextWrapper,
-  TopLine,
-  Heading,
-  Subtitle,
   PetWrapper,
+  FormWrapper,
+  AdvertWrapper,
   PagiRow,
+  SelectRow,
 } from "./AdoptionElements";
+import { NativeSelect } from "@mui/material";
 
 const Img = styled("img")({
   margin: "auto",
@@ -36,364 +37,398 @@ const AdoptionPage = () => {
     <>
       <AdoptionContainer>
         <AdoptionWrapper>
-          <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
-            <Box gridColumn="span 3">
-              <div className="filterButtonsMain">
-                <button value="ALL" className="filterButtonsAll">
-                  TÜMÜ
-                </button>
-                <button value="USER" className="filterButtonsUser">
-                  KÖPEK
-                </button>
-                <button value="STUDENT" className="filterButtonsStudent">
-                  KEDİ
-                </button>
-              </div>
+          <FormWrapper>
+            <div>
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">
+                  Tür
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  label="Age"
+                  defaultValue="Hepsi"
+                >
+                  <MenuItem value={"Hepsi"} defaultValue>
+                    Hepsi
+                  </MenuItem>
+                  <MenuItem value={"Köpek"}>Köpek</MenuItem>
+                  <MenuItem value={"Kedi"}>Kedi</MenuItem>
+                </Select>
+              </FormControl>
+              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-standard-label">
+                  Barınak
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-standard-label"
+                  id="demo-simple-select-standard"
+                  label="Age"
+                  defaultValue="Hepsi"
+                >
+                  <MenuItem value={"Hepsi"}>Hepsi</MenuItem>
+                  <MenuItem value={"Antalya Konyaaltı"}>
+                    Antalya Konyaaltı Barınağı
+                  </MenuItem>
+                  <MenuItem value={"Fatih Yedikule"}>
+                    Fatih Yedikule Barınağı
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+          </FormWrapper>
+          <AdvertWrapper>
+            <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+              <Box gridColumn="span 12">
+                <Grid container spacing={2} columns={24}>
+                  <Grid item xs={24} sm={12} md={6}>
+                    <PetWrapper>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          margin: "auto",
+                          maxWidth: 500,
+                          flexGrow: 1,
+                        }}
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase
+                              sx={{
+                                width: 128,
+                                height: 128,
+                              }}
+                            >
+                              <Img alt="complex" src={Cat} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid
+                              item
+                              xs
+                              container
+                              direction="column"
+                              spacing={2}
+                            >
+                              <Grid item xs>
+                                <Typography
+                                  gutterBottom
+                                  variant="subtitle1"
+                                  component="div"
+                                >
+                                  <b>Kedi</b>
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                  Cinsi: Tekir
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  Yaşı: 2
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{ cursor: "pointer" }}
+                                  variant="body2"
+                                >
+                                  Detaylar
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </PetWrapper>
+                  </Grid>
+                  <Grid item xs={24} sm={12} md={6}>
+                    <PetWrapper>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          margin: "auto",
+                          maxWidth: 500,
+                          flexGrow: 1,
+                        }}
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase sx={{ width: 128, height: 128 }}>
+                              <Img alt="complex" src={Cat} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid
+                              item
+                              xs
+                              container
+                              direction="column"
+                              spacing={2}
+                            >
+                              <Grid item xs>
+                                <Typography
+                                  gutterBottom
+                                  variant="subtitle1"
+                                  component="div"
+                                >
+                                  <b>Kedi</b>
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                  Cinsi: Tekir
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  Yaşı: 2
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{ cursor: "pointer" }}
+                                  variant="body2"
+                                >
+                                  Detaylar
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </PetWrapper>
+                  </Grid>
+                  <Grid item xs={24} sm={12} md={6}>
+                    <PetWrapper>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          margin: "auto",
+                          maxWidth: 500,
+                          flexGrow: 1,
+                        }}
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase sx={{ width: 128, height: 128 }}>
+                              <Img alt="complex" src={Cat} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid
+                              item
+                              xs
+                              container
+                              direction="column"
+                              spacing={2}
+                            >
+                              <Grid item xs>
+                                <Typography
+                                  gutterBottom
+                                  variant="subtitle1"
+                                  component="div"
+                                >
+                                  <b>Kedi</b>
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                  Cinsi: Tekir
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  Yaşı: 2
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{ cursor: "pointer" }}
+                                  variant="body2"
+                                >
+                                  Detaylar
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </PetWrapper>
+                  </Grid>
+                  <Grid item xs={24} sm={12} md={6}>
+                    <PetWrapper>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          margin: "auto",
+                          maxWidth: 500,
+                          flexGrow: 1,
+                        }}
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase sx={{ width: 128, height: 128 }}>
+                              <Img alt="complex" src={Cat} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid
+                              item
+                              xs
+                              container
+                              direction="column"
+                              spacing={2}
+                            >
+                              <Grid item xs>
+                                <Typography
+                                  gutterBottom
+                                  variant="subtitle1"
+                                  component="div"
+                                >
+                                  <b>Kedi</b>
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                  Cinsi: Tekir
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  Yaşı: 2
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{ cursor: "pointer" }}
+                                  variant="body2"
+                                >
+                                  Detaylar
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </PetWrapper>
+                  </Grid>
+                  <Grid item xs={24} sm={12} md={6}>
+                    <PetWrapper>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          margin: "auto",
+                          maxWidth: 500,
+                          flexGrow: 1,
+                        }}
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase sx={{ width: 128, height: 128 }}>
+                              <Img alt="complex" src={Cat} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid
+                              item
+                              xs
+                              container
+                              direction="column"
+                              spacing={2}
+                            >
+                              <Grid item xs>
+                                <Typography
+                                  gutterBottom
+                                  variant="subtitle1"
+                                  component="div"
+                                >
+                                  <b>Kedi</b>
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                  Cinsi: Tekir
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  Yaşı: 2
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{ cursor: "pointer" }}
+                                  variant="body2"
+                                >
+                                  Detaylar
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </PetWrapper>
+                  </Grid>
+                  <Grid item xs={24} sm={12} md={6}>
+                    <PetWrapper>
+                      <Paper
+                        sx={{
+                          p: 2,
+                          margin: "auto",
+                          maxWidth: 500,
+                          flexGrow: 1,
+                        }}
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+                            <ButtonBase sx={{ width: 128, height: 128 }}>
+                              <Img alt="complex" src={Cat} />
+                            </ButtonBase>
+                          </Grid>
+                          <Grid item xs={12} sm container>
+                            <Grid
+                              item
+                              xs
+                              container
+                              direction="column"
+                              spacing={2}
+                            >
+                              <Grid item xs>
+                                <Typography
+                                  gutterBottom
+                                  variant="subtitle1"
+                                  component="div"
+                                >
+                                  <b>Kedi</b>
+                                </Typography>
+                                <Typography variant="body2" gutterBottom>
+                                  Cinsi: Tekir
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  Yaşı: 2
+                                </Typography>
+                              </Grid>
+                              <Grid item>
+                                <Typography
+                                  sx={{ cursor: "pointer" }}
+                                  variant="body2"
+                                >
+                                  Detaylar
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </PetWrapper>
+                  </Grid>
+                </Grid>
+              </Box>
             </Box>
-            <Box gridColumn="span 8">
-              <Grid container spacing={2} columns={24}>
-                <Grid item xs={24} sm={12} md={8}>
-                  <PetWrapper>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        margin: "auto",
-                        maxWidth: 500,
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <ButtonBase sx={{ width: 128, height: 128 }}>
-                            <Img alt="complex" src={Cat} />
-                          </ButtonBase>
-                        </Grid>
-                        <Grid item xs={12} sm container>
-                          <Grid
-                            item
-                            xs
-                            container
-                            direction="column"
-                            spacing={2}
-                          >
-                            <Grid item xs>
-                              <Typography
-                                gutterBottom
-                                variant="subtitle1"
-                                component="div"
-                              >
-                                <b>Kedi</b>
-                              </Typography>
-                              <Typography variant="body2" gutterBottom>
-                                Cinsi: Tekir
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Yaşı: 2
-                              </Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography
-                                sx={{ cursor: "pointer" }}
-                                variant="body2"
-                              >
-                                Detaylar
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </PetWrapper>
-                </Grid>
-                <Grid item xs={24} sm={12} md={8}>
-                  <PetWrapper>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        margin: "auto",
-                        maxWidth: 500,
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <ButtonBase sx={{ width: 128, height: 128 }}>
-                            <Img alt="complex" src={Cat} />
-                          </ButtonBase>
-                        </Grid>
-                        <Grid item xs={12} sm container>
-                          <Grid
-                            item
-                            xs
-                            container
-                            direction="column"
-                            spacing={2}
-                          >
-                            <Grid item xs>
-                              <Typography
-                                gutterBottom
-                                variant="subtitle1"
-                                component="div"
-                              >
-                                <b>Kedi</b>
-                              </Typography>
-                              <Typography variant="body2" gutterBottom>
-                                Cinsi: Tekir
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Yaşı: 2
-                              </Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography
-                                sx={{ cursor: "pointer" }}
-                                variant="body2"
-                              >
-                                Detaylar
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </PetWrapper>
-                </Grid>
-                <Grid item xs={24} sm={12} md={8}>
-                  <PetWrapper>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        margin: "auto",
-                        maxWidth: 500,
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <ButtonBase sx={{ width: 128, height: 128 }}>
-                            <Img alt="complex" src={Cat} />
-                          </ButtonBase>
-                        </Grid>
-                        <Grid item xs={12} sm container>
-                          <Grid
-                            item
-                            xs
-                            container
-                            direction="column"
-                            spacing={2}
-                          >
-                            <Grid item xs>
-                              <Typography
-                                gutterBottom
-                                variant="subtitle1"
-                                component="div"
-                              >
-                                <b>Kedi</b>
-                              </Typography>
-                              <Typography variant="body2" gutterBottom>
-                                Cinsi: Tekir
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Yaşı: 2
-                              </Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography
-                                sx={{ cursor: "pointer" }}
-                                variant="body2"
-                              >
-                                Detaylar
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </PetWrapper>
-                </Grid>
-                <Grid item xs={24} sm={12} md={8}>
-                  <PetWrapper>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        margin: "auto",
-                        maxWidth: 500,
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <ButtonBase sx={{ width: 128, height: 128 }}>
-                            <Img alt="complex" src={Cat} />
-                          </ButtonBase>
-                        </Grid>
-                        <Grid item xs={12} sm container>
-                          <Grid
-                            item
-                            xs
-                            container
-                            direction="column"
-                            spacing={2}
-                          >
-                            <Grid item xs>
-                              <Typography
-                                gutterBottom
-                                variant="subtitle1"
-                                component="div"
-                              >
-                                <b>Kedi</b>
-                              </Typography>
-                              <Typography variant="body2" gutterBottom>
-                                Cinsi: Tekir
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Yaşı: 2
-                              </Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography
-                                sx={{ cursor: "pointer" }}
-                                variant="body2"
-                              >
-                                Detaylar
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </PetWrapper>
-                </Grid>
-                <Grid item xs={24} sm={12} md={8}>
-                  <PetWrapper>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        margin: "auto",
-                        maxWidth: 500,
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <ButtonBase sx={{ width: 128, height: 128 }}>
-                            <Img alt="complex" src={Cat} />
-                          </ButtonBase>
-                        </Grid>
-                        <Grid item xs={12} sm container>
-                          <Grid
-                            item
-                            xs
-                            container
-                            direction="column"
-                            spacing={2}
-                          >
-                            <Grid item xs>
-                              <Typography
-                                gutterBottom
-                                variant="subtitle1"
-                                component="div"
-                              >
-                                <b>Kedi</b>
-                              </Typography>
-                              <Typography variant="body2" gutterBottom>
-                                Cinsi: Tekir
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Yaşı: 2
-                              </Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography
-                                sx={{ cursor: "pointer" }}
-                                variant="body2"
-                              >
-                                Detaylar
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </PetWrapper>
-                </Grid>
-                <Grid item xs={24} sm={12} md={8}>
-                  <PetWrapper>
-                    <Paper
-                      sx={{
-                        p: 2,
-                        margin: "auto",
-                        maxWidth: 500,
-                        flexGrow: 1,
-                      }}
-                    >
-                      <Grid container spacing={2}>
-                        <Grid item>
-                          <ButtonBase sx={{ width: 128, height: 128 }}>
-                            <Img alt="complex" src={Cat} />
-                          </ButtonBase>
-                        </Grid>
-                        <Grid item xs={12} sm container>
-                          <Grid
-                            item
-                            xs
-                            container
-                            direction="column"
-                            spacing={2}
-                          >
-                            <Grid item xs>
-                              <Typography
-                                gutterBottom
-                                variant="subtitle1"
-                                component="div"
-                              >
-                                <b>Kedi</b>
-                              </Typography>
-                              <Typography variant="body2" gutterBottom>
-                                Cinsi: Tekir
-                              </Typography>
-                              <Typography
-                                variant="body2"
-                                color="text.secondary"
-                              >
-                                Yaşı: 2
-                              </Typography>
-                            </Grid>
-                            <Grid item>
-                              <Typography
-                                sx={{ cursor: "pointer" }}
-                                variant="body2"
-                              >
-                                Detaylar
-                              </Typography>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Paper>
-                  </PetWrapper>
-                </Grid>
-              </Grid>
-            </Box>
-          </Box>
+          </AdvertWrapper>
           <PagiRow>
-            <Stack spacing={2}>
-              <Pagination count={10} showFirstButton showLastButton />
+            <Stack spacing={1}>
+              <Pagination count={10} />
             </Stack>
           </PagiRow>
         </AdoptionWrapper>

@@ -16,7 +16,7 @@ const Sidebar = ({ isOpen, toggle }) => {
       </Icon>
       <SidebarWrapper>
         <SidebarMenu>
-          <SidebarLink to="about" onClick={toggle}>
+          <SidebarLink href="/sahiplen" onClick={toggle}>
             Sahiplen
           </SidebarLink>
           <SidebarLink to="shelters" onClick={toggle}>
@@ -25,7 +25,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           <SidebarLink to="services" onClick={toggle}>
             Hizmetlerimiz
           </SidebarLink>
-          <SidebarLink to="donate" onClick={toggle}>
+          <SidebarLink href="/bagis" onClick={toggle}>
             Bağış Yap
           </SidebarLink>
         </SidebarMenu>
