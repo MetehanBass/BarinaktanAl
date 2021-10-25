@@ -23,7 +23,7 @@ import {
   PagiRow,
   SelectRow,
 } from "./AdoptionElements";
-import { NativeSelect } from "@mui/material";
+import { Link, NativeSelect } from "@mui/material";
 
 const Img = styled("img")({
   margin: "auto",
@@ -129,12 +129,13 @@ const AdoptionPage = () => {
                                 </Typography>
                               </Grid>
                               <Grid item>
-                                <Typography
-                                  sx={{ cursor: "pointer" }}
+                                <Link
+                                  href="/sahiplen_detay"
                                   variant="body2"
+                                  underline="none"
                                 >
                                   Detaylar
-                                </Typography>
+                                </Link>
                               </Grid>
                             </Grid>
                           </Grid>

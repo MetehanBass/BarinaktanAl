@@ -5,6 +5,7 @@ import DonateCards from "./views/donateCards";
 import Donate from "./views/donate";
 import DonateConfirm from "./views/donateConfirm";
 import Adoption from "./views/adoption";
+import AdoptionDetails from "./views/adoptionDetails";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/sahiplen" component={Adoption} exact />
+        <Route path="/sahiplen_detay" component={AdoptionDetails} exact />
         <Route path="/bagis" component={DonateCards} exact />
         <Route path="/bagis_yap" component={Donate} exact />
         <Route path="/bagis_tamamla" component={DonateConfirm} exact />
