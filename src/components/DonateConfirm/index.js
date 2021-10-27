@@ -1,4 +1,4 @@
-import { StepLabel, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 

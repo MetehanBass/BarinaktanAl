@@ -37,7 +37,7 @@ const Navbar = ({ toggle }) => {
                 <NavLinks>Anlaşmalı Barınaklarımız</NavLinks>
               </NavItem>
               <NavItem>
-                <NavLinks>Hizmetlerimiz</NavLinks>
+                <NavLinks>Galeri</NavLinks>
               </NavItem>
               <NavItem>
                 <NavLinks href="/bagis">Bağış Yap</NavLinks>

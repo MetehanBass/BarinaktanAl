@@ -22,8 +22,8 @@ const Sidebar = ({ isOpen, toggle }) => {
           <SidebarLink to="shelters" onClick={toggle}>
             Anlaşmalı Barınaklarımız
           </SidebarLink>
-          <SidebarLink to="services" onClick={toggle}>
-            Hizmetlerimiz
+          <SidebarLink to="gallery" onClick={toggle}>
+            Galeri
           </SidebarLink>
           <SidebarLink href="/bagis" onClick={toggle}>
             Bağış Yap
