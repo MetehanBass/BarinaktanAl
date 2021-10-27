@@ -188,7 +188,6 @@ export default function index() {
                       title="Gerekli"
                       id="name"
                       label="İsim Soyisim"
-                      autoFocus
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
