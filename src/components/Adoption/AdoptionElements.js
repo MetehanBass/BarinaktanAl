@@ -45,6 +45,8 @@ export const PetWrapper = styled.div`
 
 export const FormWrapper = styled.div`
   max-height: 0px;
+  align-items: center;
+  display: flex;
 `;
 
 export const AdvertWrapper = styled.div`
@@ -59,67 +61,42 @@ export const AdvertWrapper = styled.div`
   }
 `;
 
-export const Column1 = styled.div`
-  margin-bottom: 15px;
-  padding: 0 15px;
-  grid-area: col1;
-`;
-
-export const Column2 = styled.div`
-  margin-bottom: 15px;
-  padding: 0 15px;
-  grid-area: col2;
-`;
-export const TextWrapper = styled.div`
-  max-width: 540px;
-  padding-top: 0;
-  padding-bottom: 60px;
-`;
-
-export const TopLine = styled.p`
-  color: #01bf71;
+export const ButtonFilter = styled.button`
+  border-radius: 50px;
+  color: #fff;
+  background-color: #dec26f;
+  white-space: nowrap;
+  padding: 12px 12px;
+  /* background: transparent; */
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin-left: 8px;
   font-size: 16px;
-  line-height: 16px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 `;
 
-export const Heading = styled.h1`
-  margin-bottom: 24px;
-  font-size: 48px;
-  line-height: 1.1;
-  font-weight: 600;
-  color: ${({ lightText }) => (lightText ? "#f7ffa" : "#000")};
+export const ButtonPopover = styled.button`
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  color: #000;
+  justify-content: center;
+  padding: 12px 12px;
+  align-items: center;
+  outline: none;
+  font-size: 20px;
 
-  @media screen and (max-width: 480px) {
-    font-size: 32px;
+  transition: all 0.2s ease-in-ease-out;
+
+  &:hover {
+    background-color: #dec26f;
+    transition: all 0.2s ease-in-out;
   }
-`;
-
-export const Subtitle = styled.p`
-  max-width: 440px;
-  margin-bottom: 35px;
-  font-size: 18px;
-  line-height: 24px;
-  color: ${({ darkText }) => (darkText ? "#000" : "#f7ffa")};
-`;
-
-export const BtnWrap = styled.div`
-  display: flex;
-  justify-content: flex-start;
-`;
-
-export const ImgWrap = styled.div`
-  max-width: 555px;
-  height: 100%;
-`;
-
-export const Img = styled.img`
-  width: 100%;
-  margin: 0 0 10px 0;
-  padding-right: 0;
 `;
 
 export const PagiRow = styled.div`

@@ -10,9 +10,11 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import React from "react";
+import React, { useState } from "react";
 
 import Cat from "../../images/svg-7.svg";
+import { BsFilterCircle } from "react-icons/bs";
+import { BsSortDown } from "react-icons/bs";
 
 import {
   AdoptionContainer,
@@ -21,9 +23,10 @@ import {
   FormWrapper,
   AdvertWrapper,
   PagiRow,
-  SelectRow,
+  ButtonFilter,
+  ButtonPopover,
 } from "./AdoptionElements";
-import { Link, NativeSelect } from "@mui/material";
+import { Link, Popover } from "@mui/material";
 
 const Img = styled("img")({
   margin: "auto",
@@ -33,49 +36,138 @@ const Img = styled("img")({
 });
 
 const AdoptionPage = () => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const [sort, setSort] = useState("Varsayılan");
+  const [openSort, setOpenSort] = React.useState(false);
+
+  const handleChange = (event) => {
+    setSort(event.target.value);
+  };
+
+  const handleCloseSort = () => {
+    setOpenSort(false);
+  };
+
+  const handleOpenSort = () => {
+    setOpenSort(true);
+  };
+  console.log({ sort });
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
     <>
       <AdoptionContainer>
         <AdoptionWrapper>
           <FormWrapper>
-            <div>
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="demo-simple-select-standard-label">
-                  Tür
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  label="Age"
-                  defaultValue="Hepsi"
-                >
-                  <MenuItem value={"Hepsi"} defaultValue>
-                    Hepsi
-                  </MenuItem>
-                  <MenuItem value={"Köpek"}>Köpek</MenuItem>
-                  <MenuItem value={"Kedi"}>Kedi</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                <InputLabel id="demo-simple-select-standard-label">
-                  Barınak
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  label="Age"
-                  defaultValue="Hepsi"
-                >
-                  <MenuItem value={"Hepsi"}>Hepsi</MenuItem>
-                  <MenuItem value={"Antalya Konyaaltı"}>
-                    Antalya Konyaaltı Barınağı
-                  </MenuItem>
-                  <MenuItem value={"Fatih Yedikule"}>
-                    Fatih Yedikule Barınağı
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </div>
+            <ButtonPopover
+              aria-describedby={id}
+              variant="contained"
+              onClick={handleClick}
+            >
+              <BsFilterCircle /> Filtrele
+            </ButtonPopover>
+            <Popover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <Typography sx={{ p: 2 }}>
+                Filtrelemek istediğiniz özellikleri seçin.
+              </Typography>
+              <div>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="demo-simple-select-standard-label">
+                    Tür
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    label="Age"
+                    defaultValue="Hepsi"
+                  >
+                    <MenuItem value={"Hepsi"} defaultValue>
+                      Hepsi
+                    </MenuItem>
+                    <MenuItem value={"Köpek"}>Köpek</MenuItem>
+                    <MenuItem value={"Kedi"}>Kedi</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="demo-simple-select-standard-label">
+                    Barınak
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    label="Age"
+                    defaultValue="Hepsi"
+                  >
+                    <MenuItem value={"Hepsi"}>Hepsi</MenuItem>
+                    <MenuItem value={"Antalya Konyaaltı"}>
+                      Antalya Konyaaltı Barınağı
+                    </MenuItem>
+                    <MenuItem value={"Fatih Yedikule"}>
+                      Fatih Yedikule Barınağı
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                  <InputLabel id="demo-simple-select-standard-label">
+                    Barınak
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-standard-label"
+                    id="demo-simple-select-standard"
+                    label="Age"
+                    defaultValue="Hepsi"
+                  >
+                    <MenuItem value={"Hepsi"}>Hepsi</MenuItem>
+                    <MenuItem value={"Antalya Konyaaltı"}>
+                      Antalya Konyaaltı Barınağı
+                    </MenuItem>
+                    <MenuItem value={"Fatih Yedikule"}>
+                      Fatih Yedikule Barınağı
+                    </MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+              <ButtonFilter>Filtrele</ButtonFilter>
+            </Popover>
+            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+              <InputLabel id="demo-controlled-open-select-label">
+                <BsSortDown /> Sırala
+              </InputLabel>
+              <Select
+                labelId="demo-controlled-open-select-label"
+                id="demo-controlled-open-select"
+                open={openSort}
+                onClose={handleCloseSort}
+                onOpen={handleOpenSort}
+                value={sort}
+                label="Sort"
+                onChange={handleChange}
+              >
+                <MenuItem value="Varsayılan">
+                  <em>Varsayılan</em>
+                </MenuItem>
+                <MenuItem value="BARINAGA">Barınağa göre</MenuItem>
+                <MenuItem value="CINSE">Cinse göre</MenuItem>
+              </Select>
+            </FormControl>
           </FormWrapper>
           <AdvertWrapper>
             <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
