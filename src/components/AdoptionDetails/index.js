@@ -3,6 +3,7 @@ import Cat from "../../images/svg-7.svg";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./modal-style.css";
+import CarouselComponent from "../Carousel/index";
 
 import {
   AdoptionContainer,
@@ -87,7 +88,7 @@ const AdoptionDetailsPage = () => {
             </Column1>
             <Column2>
               <ImgWrap>
-                <Img src={Cat} alt="Pet" />
+                <CarouselComponent />
               </ImgWrap>
             </Column2>
           </AdoptionRow>

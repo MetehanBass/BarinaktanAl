@@ -50,11 +50,9 @@ export const Column2 = styled.div`
   grid-area: col2;
 `;
 
-export const ImgWrap = styled.div`
-  background-color: #000;
-`;
+export const ImgWrap = styled.div``;
 
-export const Img = styled.img`
+export const Img = styled.div`
   max-width: 600px;
   height: 600px;
 
@@ -129,7 +127,7 @@ export const Heading = styled.h1`
   color: #000;
 
   @media screen and (max-width: 480px) {
-    font-size: 32px;
+    font-size: 16px;
   }
 `;
 
