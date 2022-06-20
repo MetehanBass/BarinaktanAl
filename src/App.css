@@ -16,3 +16,15 @@
 ::-webkit-scrollbar-thumb {
   background-color: #dec26f;
 }
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.diseaseErrMsg {
+  color: #f93154;
+  margin-top: 5px;
+  text-align: left;
+  font-size: 14px;
+}

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import Cat from "../../images/svg-7.svg";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getPet } from "../../redux/feature/petSlice";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import "./modal-style.css";
-import CarouselComponent from "../Carousel/index";
+import { getShelters } from "../../redux/feature/shelterSlice";
 
 import {
   AdoptionContainer,
   AdoptionWrapper,
   ImgWrap,
-  InfoWrap,
   Column1,
   Column2,
   AdoptionRow,
@@ -25,6 +26,29 @@ import {
 
 const AdoptionDetailsPage = () => {
   const [open, setOpen] = useState(false);
+  const { pet } = useSelector((state) => ({ ...state.pet }));
+  const { shelters } = useSelector((state) => ({ ...state.shelter }));
+  const [shelterData, setShelterData] = useState("");
+  const dispatch = useDispatch();
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(getShelters());
+  }, []);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getPet(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const singleShelter = shelters.find(
+      (shelter) => shelter.name === pet.shelter
+    );
+    setShelterData({ ...singleShelter });
+  }, [pet]);
 
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
@@ -35,33 +59,39 @@ const AdoptionDetailsPage = () => {
           <AdoptionRow>
             <Column1>
               <TextWrapper>
-                <TopLine>Antalya Konyaaltı Hayvan Barınağı</TopLine>
-                <Heading>Konyaaltı/Antalya</Heading>
+                <TopLine>{pet.shelter}</TopLine>
+                <Heading>{shelterData.address}</Heading>
                 <Subtitle>
-                  İsim:<b> Yok</b>
+                  İsim:<b> {pet.name}</b>
                 </Subtitle>
                 <Subtitle>
-                  Yaş: <b>3-5</b>
+                  Yaş: <b>{pet.age}</b>
                 </Subtitle>
                 <Subtitle>
-                  Cinsiyeti:<b> Erkek</b>
+                  Cinsiyeti:<b> {pet.gender}</b>
                 </Subtitle>
                 <Subtitle>
-                  Cinsi:<b> Tekir</b>
+                  Cinsi:<b> {pet.breed}</b>
                 </Subtitle>
                 <Subtitle>
-                  Kısır:<b> Değil</b>
+                  Kısır:<b> {pet.isBarren}</b>
                 </Subtitle>
                 <Subtitle>
-                  Hastalık:<b> Yok</b>
+                  Hastalık:
+                  <b>
+                    {pet &&
+                      pet.diseases &&
+                      pet.diseases.map((item) => `${item} `)}
+                  </b>
                 </Subtitle>
                 <Subtitle>
-                  Hayvan Kodu:<b> KD9951</b>
+                  Hayvan Kodu:<b> {pet.petId}</b>
                 </Subtitle>
                 <BtnWrap>
                   <ButtonContact onClick={onOpenModal}>
                     İletişime geç
                   </ButtonContact>
+
                   <Modal
                     open={open}
                     onClose={onCloseModal}
@@ -72,15 +102,15 @@ const AdoptionDetailsPage = () => {
                     center
                   >
                     <ContactText>
-                      Barınak Telefonu:<b> 0 242 653 35 53</b>
+                      Barınak Telefonu:<b> {shelterData.phone}</b>
                     </ContactText>
                     <ContactText>
                       Barınak E-postası:
-                      <b> konyaaltıbarınak@gmail.com</b>
+                      <b> {shelterData.email}</b>
                     </ContactText>
                     <ContactText>
                       İlanda belirtilen <em>Hayvan Kodu</em> ile barınağa bu
-                      dostumuzu sorabilirsiniz. Örneğin :<b> KD9951</b>
+                      dostumuzu sorabilirsiniz. Örneğin :<b> {pet.petId}</b>
                     </ContactText>
                   </Modal>
                 </BtnWrap>
@@ -88,7 +118,7 @@ const AdoptionDetailsPage = () => {
             </Column1>
             <Column2>
               <ImgWrap>
-                <CarouselComponent />
+                <Img src={pet.imageFile}></Img>
               </ImgWrap>
             </Column2>
           </AdoptionRow>

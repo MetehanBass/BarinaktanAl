@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Donate from "../components/Donate";
+import ShelterTable from "../components/Shelters";
 
-const DonatePage = () => {
+const Shelters = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const toggle = () => {
     setIsOpen(!isOpen);
   };
@@ -13,10 +14,10 @@ const DonatePage = () => {
     <>
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
-      <Donate />
+      <ShelterTable />
       <Footer />
     </>
   );
 };
 
-export default DonatePage;
+export default Shelters;

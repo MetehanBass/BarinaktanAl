@@ -52,7 +52,7 @@ export const Column2 = styled.div`
 
 export const ImgWrap = styled.div``;
 
-export const Img = styled.div`
+export const Img = styled.img`
   max-width: 600px;
   height: 600px;
 

@@ -96,6 +96,10 @@ export const DonateH1 = styled.h1`
   }
 `;
 
+export const Amount = styled.p`
+  font-size: 1rem;
+  margin-bottom: 10px;
+`;
 export const DonateH2 = styled.h2`
   font-size: 1rem;
   margin-bottom: 10px;
@@ -166,4 +170,11 @@ export const DonateButton = styled.a`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+`;
+
+export const CartButton = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+
+  align-items: center;
 `;

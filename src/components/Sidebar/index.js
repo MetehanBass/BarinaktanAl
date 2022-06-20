@@ -19,7 +19,7 @@ const Sidebar = ({ isOpen, toggle }) => {
           <SidebarLink href="/sahiplen" onClick={toggle}>
             Sahiplen
           </SidebarLink>
-          <SidebarLink to="shelters" onClick={toggle}>
+          <SidebarLink href="/barinaklar" onClick={toggle}>
             Anlaşmalı Barınaklarımız
           </SidebarLink>
           <SidebarLink to="gallery" onClick={toggle}>

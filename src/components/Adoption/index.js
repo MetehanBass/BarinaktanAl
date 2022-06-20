@@ -1,531 +1,153 @@
-import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PetCard from "./petCard";
+import { useNavigate } from "react-router-dom";
+import { MDBIcon } from "mdb-react-ui-kit";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import React, { useState } from "react";
-
-import Cat from "../../images/svg-7.svg";
-import { BsFilterCircle } from "react-icons/bs";
-import { BsSortDown } from "react-icons/bs";
 
 import {
   AdoptionContainer,
   AdoptionWrapper,
-  PetWrapper,
   FormWrapper,
   AdvertWrapper,
   PagiRow,
-  ButtonFilter,
-  ButtonPopover,
 } from "./AdoptionElements";
-import { Link, Popover } from "@mui/material";
+import { Typography } from "@mui/material";
+import {
+  getPets,
+  getPetsByPagination,
+  searchPets,
+} from "../../redux/feature/petSlice";
+import ScreenLoader from "../Loader/ScreenLoader";
+import { getShelters } from "../../redux/feature/shelterSlice";
 
-const Img = styled("img")({
-  margin: "auto",
-  display: "block",
-  maxWidth: "100%",
-  maxHeight: "100%",
-});
+const FETCH_COUNT = 12;
 
 const AdoptionPage = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const { pets, loading, petsCount } = useSelector((state) => ({
+    ...state.pet,
+  }));
+  const { shelters, loading: sheltersLoading } = useSelector((state) => ({
+    ...state.shelter,
+  }));
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(0);
+  const [selectedShelterFilter, setSelectedShelterFilter] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  useEffect(() => {
+    dispatch(
+      getPetsByPagination({ count: FETCH_COUNT, page: 0, shelter: undefined })
+    );
+  }, []);
+
+  useEffect(() => {
+    dispatch(getShelters());
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (search) {
+      dispatch(searchPets(search));
+      navigate(`/sahiplen/search?searchQuery=${search}`);
+    } else {
+      dispatch(getPets());
+      navigate(`/sahiplen`);
+    }
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleSearchByShelter = (e) => {
+    console.log("e.taret.value", e.target.value);
+    setSelectedShelterFilter(e.target.value);
+    dispatch(
+      getPetsByPagination({
+        count: FETCH_COUNT,
+        page: 0,
+        shelter: e.target.value,
+      })
+    );
   };
 
-  const [sort, setSort] = useState("Varsayılan");
-  const [openSort, setOpenSort] = React.useState(false);
-
-  const handleChange = (event) => {
-    setSort(event.target.value);
+  const onPageClick = (_, page) => {
+    setPage(page);
+    dispatch(
+      getPetsByPagination({
+        count: FETCH_COUNT,
+        page: page - 1,
+        shelter: selectedShelterFilter,
+      })
+    );
   };
 
-  const handleCloseSort = () => {
-    setOpenSort(false);
-  };
-
-  const handleOpenSort = () => {
-    setOpenSort(true);
-  };
-  console.log({ sort });
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
   return (
     <>
-      <AdoptionContainer>
-        <AdoptionWrapper>
-          <FormWrapper>
-            <ButtonPopover
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-            >
-              <BsFilterCircle /> Filtrele
-            </ButtonPopover>
-            <Popover
-              id={id}
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
-              }}
-            >
-              <Typography sx={{ p: 2 }}>
-                Filtrelemek istediğiniz özellikleri seçin.
+      {loading ? (
+        <ScreenLoader />
+      ) : (
+        <AdoptionContainer>
+          <AdoptionWrapper>
+            <FormWrapper>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Barınaklar
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={selectedShelterFilter}
+                  label="Age"
+                  onChange={handleSearchByShelter}
+                >
+                  <MenuItem value={undefined}>{"Hepsini ara"}</MenuItem>
+                  {shelters.map((x) => (
+                    <MenuItem value={x.name}>{x.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </FormWrapper>
+            {pets.length === 0 && (
+              <Typography variant="h4" color="ButtonText">
+                {`No data available with the given search parameter ${search}`}
               </Typography>
-              <div>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-standard-label">
-                    Tür
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    label="Age"
-                    defaultValue="Hepsi"
+            )}
+            <AdvertWrapper>
+              <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+                <Box gridColumn="span 12">
+                  <Grid
+                    container
+                    spacing={2}
+                    columns={24}
+                    style={{ marginTop: "4%" }}
                   >
-                    <MenuItem value={"Hepsi"} defaultValue>
-                      Hepsi
-                    </MenuItem>
-                    <MenuItem value={"Köpek"}>Köpek</MenuItem>
-                    <MenuItem value={"Kedi"}>Kedi</MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-standard-label">
-                    Barınak
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    label="Age"
-                    defaultValue="Hepsi"
-                  >
-                    <MenuItem value={"Hepsi"}>Hepsi</MenuItem>
-                    <MenuItem value={"Antalya Konyaaltı"}>
-                      Antalya Konyaaltı Barınağı
-                    </MenuItem>
-                    <MenuItem value={"Fatih Yedikule"}>
-                      Fatih Yedikule Barınağı
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                  <InputLabel id="demo-simple-select-standard-label">
-                    Barınak
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-standard-label"
-                    id="demo-simple-select-standard"
-                    label="Age"
-                    defaultValue="Hepsi"
-                  >
-                    <MenuItem value={"Hepsi"}>Hepsi</MenuItem>
-                    <MenuItem value={"Antalya Konyaaltı"}>
-                      Antalya Konyaaltı Barınağı
-                    </MenuItem>
-                    <MenuItem value={"Fatih Yedikule"}>
-                      Fatih Yedikule Barınağı
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-              <ButtonFilter>Filtrele</ButtonFilter>
-            </Popover>
-            <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-              <InputLabel id="demo-controlled-open-select-label">
-                <BsSortDown /> Sırala
-              </InputLabel>
-              <Select
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                open={openSort}
-                onClose={handleCloseSort}
-                onOpen={handleOpenSort}
-                value={sort}
-                label="Sort"
-                onChange={handleChange}
-              >
-                <MenuItem value="Varsayılan">
-                  <em>Varsayılan</em>
-                </MenuItem>
-                <MenuItem value="BARINAGA">Barınağa göre</MenuItem>
-                <MenuItem value="CINSE">Cinse göre</MenuItem>
-              </Select>
-            </FormControl>
-          </FormWrapper>
-          <AdvertWrapper>
-            <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
-              <Box gridColumn="span 12">
-                <Grid container spacing={2} columns={24}>
-                  <Grid item xs={24} sm={12} md={6}>
-                    <PetWrapper>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          margin: "auto",
-                          maxWidth: 500,
-                          flexGrow: 1,
-                        }}
-                      >
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <ButtonBase
-                              sx={{
-                                width: 128,
-                                height: 128,
-                              }}
-                            >
-                              <Img alt="complex" src={Cat} />
-                            </ButtonBase>
-                          </Grid>
-                          <Grid item xs={12} sm container>
-                            <Grid
-                              item
-                              xs
-                              container
-                              direction="column"
-                              spacing={2}
-                            >
-                              <Grid item xs>
-                                <Typography
-                                  gutterBottom
-                                  variant="subtitle1"
-                                  component="div"
-                                >
-                                  <b>Kedi</b>
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                  Cinsi: Tekir
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  Yaşı: 2
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Link
-                                  href="/sahiplen_detay"
-                                  variant="body2"
-                                  underline="none"
-                                >
-                                  Detaylar
-                                </Link>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Paper>
-                    </PetWrapper>
+                    {pets &&
+                      pets.map((item, index) => (
+                        <PetCard key={index} {...item} />
+                      ))}
                   </Grid>
-                  <Grid item xs={24} sm={12} md={6}>
-                    <PetWrapper>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          margin: "auto",
-                          maxWidth: 500,
-                          flexGrow: 1,
-                        }}
-                      >
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <ButtonBase sx={{ width: 128, height: 128 }}>
-                              <Img alt="complex" src={Cat} />
-                            </ButtonBase>
-                          </Grid>
-                          <Grid item xs={12} sm container>
-                            <Grid
-                              item
-                              xs
-                              container
-                              direction="column"
-                              spacing={2}
-                            >
-                              <Grid item xs>
-                                <Typography
-                                  gutterBottom
-                                  variant="subtitle1"
-                                  component="div"
-                                >
-                                  <b>Kedi</b>
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                  Cinsi: Tekir
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  Yaşı: 2
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography
-                                  sx={{ cursor: "pointer" }}
-                                  variant="body2"
-                                >
-                                  Detaylar
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Paper>
-                    </PetWrapper>
-                  </Grid>
-                  <Grid item xs={24} sm={12} md={6}>
-                    <PetWrapper>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          margin: "auto",
-                          maxWidth: 500,
-                          flexGrow: 1,
-                        }}
-                      >
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <ButtonBase sx={{ width: 128, height: 128 }}>
-                              <Img alt="complex" src={Cat} />
-                            </ButtonBase>
-                          </Grid>
-                          <Grid item xs={12} sm container>
-                            <Grid
-                              item
-                              xs
-                              container
-                              direction="column"
-                              spacing={2}
-                            >
-                              <Grid item xs>
-                                <Typography
-                                  gutterBottom
-                                  variant="subtitle1"
-                                  component="div"
-                                >
-                                  <b>Kedi</b>
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                  Cinsi: Tekir
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  Yaşı: 2
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography
-                                  sx={{ cursor: "pointer" }}
-                                  variant="body2"
-                                >
-                                  Detaylar
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Paper>
-                    </PetWrapper>
-                  </Grid>
-                  <Grid item xs={24} sm={12} md={6}>
-                    <PetWrapper>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          margin: "auto",
-                          maxWidth: 500,
-                          flexGrow: 1,
-                        }}
-                      >
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <ButtonBase sx={{ width: 128, height: 128 }}>
-                              <Img alt="complex" src={Cat} />
-                            </ButtonBase>
-                          </Grid>
-                          <Grid item xs={12} sm container>
-                            <Grid
-                              item
-                              xs
-                              container
-                              direction="column"
-                              spacing={2}
-                            >
-                              <Grid item xs>
-                                <Typography
-                                  gutterBottom
-                                  variant="subtitle1"
-                                  component="div"
-                                >
-                                  <b>Kedi</b>
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                  Cinsi: Tekir
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  Yaşı: 2
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography
-                                  sx={{ cursor: "pointer" }}
-                                  variant="body2"
-                                >
-                                  Detaylar
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Paper>
-                    </PetWrapper>
-                  </Grid>
-                  <Grid item xs={24} sm={12} md={6}>
-                    <PetWrapper>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          margin: "auto",
-                          maxWidth: 500,
-                          flexGrow: 1,
-                        }}
-                      >
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <ButtonBase sx={{ width: 128, height: 128 }}>
-                              <Img alt="complex" src={Cat} />
-                            </ButtonBase>
-                          </Grid>
-                          <Grid item xs={12} sm container>
-                            <Grid
-                              item
-                              xs
-                              container
-                              direction="column"
-                              spacing={2}
-                            >
-                              <Grid item xs>
-                                <Typography
-                                  gutterBottom
-                                  variant="subtitle1"
-                                  component="div"
-                                >
-                                  <b>Kedi</b>
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                  Cinsi: Tekir
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  Yaşı: 2
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography
-                                  sx={{ cursor: "pointer" }}
-                                  variant="body2"
-                                >
-                                  Detaylar
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Paper>
-                    </PetWrapper>
-                  </Grid>
-                  <Grid item xs={24} sm={12} md={6}>
-                    <PetWrapper>
-                      <Paper
-                        sx={{
-                          p: 2,
-                          margin: "auto",
-                          maxWidth: 500,
-                          flexGrow: 1,
-                        }}
-                      >
-                        <Grid container spacing={2}>
-                          <Grid item>
-                            <ButtonBase sx={{ width: 128, height: 128 }}>
-                              <Img alt="complex" src={Cat} />
-                            </ButtonBase>
-                          </Grid>
-                          <Grid item xs={12} sm container>
-                            <Grid
-                              item
-                              xs
-                              container
-                              direction="column"
-                              spacing={2}
-                            >
-                              <Grid item xs>
-                                <Typography
-                                  gutterBottom
-                                  variant="subtitle1"
-                                  component="div"
-                                >
-                                  <b>Kedi</b>
-                                </Typography>
-                                <Typography variant="body2" gutterBottom>
-                                  Cinsi: Tekir
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="text.secondary"
-                                >
-                                  Yaşı: 2
-                                </Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography
-                                  sx={{ cursor: "pointer" }}
-                                  variant="body2"
-                                >
-                                  Detaylar
-                                </Typography>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </Grid>
-                      </Paper>
-                    </PetWrapper>
-                  </Grid>
-                </Grid>
+                </Box>
               </Box>
-            </Box>
-          </AdvertWrapper>
-          <PagiRow>
-            <Stack spacing={1}>
-              <Pagination count={10} />
-            </Stack>
-          </PagiRow>
-        </AdoptionWrapper>
-      </AdoptionContainer>
+            </AdvertWrapper>
+            <PagiRow>
+              <Stack spacing={1}>
+                <Pagination
+                  page={page}
+                  onChange={onPageClick}
+                  count={Math.ceil(petsCount / FETCH_COUNT)}
+                />
+              </Stack>
+            </PagiRow>
+          </AdoptionWrapper>
+        </AdoptionContainer>
+      )}
     </>
   );
 };
